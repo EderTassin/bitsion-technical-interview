@@ -1,4 +1,4 @@
-# Ejercicio: Diseño de Arquitectura Distribuida para Sistema Financiero
+# Enunciado: Diseño de Arquitectura Distribuida para Sistema Financiero
 
 ## Objetivo
 Diseñar una arquitectura distribuida para un sistema de gestión de transacciones financieras utilizando .NET Core.

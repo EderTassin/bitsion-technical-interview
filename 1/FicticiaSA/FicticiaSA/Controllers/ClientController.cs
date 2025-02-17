@@ -13,76 +13,54 @@ namespace FicticiaSA.API.Controllers
             _clientService = clientService;
         }
 
-        public IActionResult Index()
+
+        [HttpGet]
+        public async Task<IActionResult> GetAll()
         {
-            var clients = _clientService.GetAllClients();
+            var clients = await _clientService.GetAllClients();
             return View(clients);
         }
+         
 
-        public IActionResult Details(int id)
+        [HttpGet]
+        public async Task<IActionResult> GetById(int id)
         {
-            var client = _clientService.GetClientById(id);
-            if (client == null)
-                return NotFound();
-                
+            var client = await _clientService.GetClientById(id);
             return View(client);
         }
 
-        public IActionResult Create()
-        {
-            return View();
-        }
 
         [HttpPost]
-        [ValidateAntiForgeryToken]
-        public IActionResult Create(Client client)
+        public async Task<IActionResult> Create(Client client)
         {
             if (ModelState.IsValid)
             {
-                _clientService.AddClient(client);
+                await _clientService.AddClient(client);
                 return RedirectToAction(nameof(Index));
             }
             return View(client);
         }
 
-        public IActionResult Edit(int id)
-        {
-            var client = _clientService.GetClientById(id);
-            if (client == null)
-                return NotFound();
-                
-            return View(client);
-        }
 
         [HttpPost]
-        [ValidateAntiForgeryToken]
-        public IActionResult Edit(int id, Client client)
+        public async Task<IActionResult> Update(int id, Client client)
         {
             if (id != client.Id)
                 return NotFound();
 
             if (ModelState.IsValid)
             {
-                _clientService.UpdateClient(client);
+                await _clientService.UpdateClient(client);
                 return RedirectToAction(nameof(Index));
             }
             return View(client);
         }
 
-        public IActionResult Delete(int id)
-        {
-            var client = _clientService.GetClientById(id);
-            if (client == null)
-                return NotFound();
-
-            return View(client);
-        }
 
         [HttpPost, ActionName("Delete")]
-        [ValidateAntiForgeryToken]
-        public IActionResult DeleteConfirmed(int id)
+        public async Task<IActionResult> Delete(int id)
         {
-            _clientService.DeleteClient(id);
+            await _clientService.DeleteClient(id);
             return RedirectToAction(nameof(Index));
         }
     }

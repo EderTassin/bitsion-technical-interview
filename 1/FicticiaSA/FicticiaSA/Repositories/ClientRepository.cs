@@ -1,5 +1,6 @@
 using FicticiaSA.API.Data;
 using FicticiaSA.API.Models;
+using Microsoft.EntityFrameworkCore;
 
 namespace FicticiaSA.API.Repositories
 {
@@ -12,35 +13,35 @@ namespace FicticiaSA.API.Repositories
             _context = context;
         }
 
-        public IEnumerable<Client> GetAll()
+        public async Task<IEnumerable<Client>> GetAll()
         {
-            return _context.Clients.ToList();
+            return await _context.Clients.ToListAsync();
         }
 
-        public Client GetById(int id)
+        public async Task<Client> GetById(int id)
         {
-            return _context.Clients.Find(id) ?? throw new KeyNotFoundException($"Client with id {id} not found.");
+            return await _context.Clients.FindAsync(id) ?? throw new KeyNotFoundException($"Client with id {id} not found.");
         }
 
-        public void Add(Client client)
+        public async Task Add(Client client)
         {
-            _context.Clients.Add(client);
-            _context.SaveChanges();
+            await _context.Clients.AddAsync(client);
+            await _context.SaveChangesAsync();
         }
 
-        public void Update(Client client)
+        public async Task Update(Client client)
         {
             _context.Clients.Update(client);
-            _context.SaveChanges();
+            await _context.SaveChangesAsync();
         }
 
-        public void Delete(int id)
+        public async Task Delete(int id)
         {
-            var client = _context.Clients.Find(id);
+            var client = await _context.Clients.FindAsync(id);
             if (client != null)
             {
                 _context.Clients.Remove(client);
-                _context.SaveChanges();
+                await _context.SaveChangesAsync();
             }
         }
     }

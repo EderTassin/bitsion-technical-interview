@@ -4,10 +4,10 @@ namespace FicticiaSA.API.Repositories
 {
     public interface IClientRepository
     {
-        IEnumerable<Client> GetAll();
-        Client GetById(int id);
-        void Add(Client client);
-        void Update(Client client);
-        void Delete(int id);
+        Task<IEnumerable<Client>> GetAll();
+        Task<Client> GetById(int id);
+        Task Add(Client client);
+        Task Update(Client client);
+        Task Delete(int id);
     }
 }

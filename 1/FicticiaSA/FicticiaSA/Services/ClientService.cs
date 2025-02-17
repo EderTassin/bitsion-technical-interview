@@ -12,29 +12,29 @@ namespace FicticiaSA.API.Services
             _clientRepository = clientRepository;
         }
 
-        public IEnumerable<Client> GetAllClients()
+        public async Task<IEnumerable<Client>> GetAllClients()
         {
-            return _clientRepository.GetAll();
+            return await _clientRepository.GetAll();
         }
 
-        public Client GetClientById(int id)
+        public async Task<Client> GetClientById(int id)
         {
-            return _clientRepository.GetById(id);
+            return await _clientRepository.GetById(id);
         }
 
-        public void AddClient(Client client)
+        public async Task AddClient(Client client)
         {
-            _clientRepository.Add(client);
+            await _clientRepository.Add(client);
         }
 
-        public void UpdateClient(Client client)
+        public async Task UpdateClient(Client client)
         {
-            _clientRepository.Update(client);
+            await _clientRepository.Update(client);
         }
 
-        public void DeleteClient(int id)
+        public async Task DeleteClient(int id)
         {
-            _clientRepository.Delete(id);
+            await _clientRepository.Delete(id);
         }
     }
 }

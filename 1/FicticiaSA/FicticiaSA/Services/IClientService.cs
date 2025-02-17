@@ -4,10 +4,10 @@ namespace FicticiaSA.API.Services
 {
     public interface IClientService
     {
-        IEnumerable<Client> GetAllClients();
-        Client GetClientById(int id);
-        void AddClient(Client client);
-        void UpdateClient(Client client);
-        void DeleteClient(int id);
+        Task<IEnumerable<Client>> GetAllClients();
+        Task<Client> GetClientById(int id);
+        Task AddClient(Client client);
+        Task UpdateClient(Client client);
+        Task DeleteClient(int id);
     }
 }
